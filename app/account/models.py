@@ -4,7 +4,6 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
-from django.db.models import BooleanField, CharField, EmailField
 from django.utils.translation import gettext_lazy as _
 
 GENDER_CHOICES = [("Man", "Мужчина"), ("Woman", "Женщина")]
@@ -36,14 +35,14 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    email = EmailField(verbose_name="Электронная почта", unique=True)
-    full_name = CharField(verbose_name="ФИО", max_length=128)
+    email = models.EmailField(verbose_name="Электронная почта", unique=True)
+    full_name = models.CharField(verbose_name="ФИО", max_length=128)
     gender = models.CharField(verbose_name="Пол", choices=GENDER_CHOICES, max_length=32)
     age = models.PositiveSmallIntegerField(
         verbose_name="Возраст",
     )
-    is_active = BooleanField(default=False)
-    is_staff = BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
