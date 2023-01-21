@@ -1,20 +1,12 @@
-from rest_framework import serializers
-from student.models import Student
+from account.serializers import CustomUserSerializer
 from group.serializers import GroupSerializer
 
+from student.models import Student
 
-class StudentSerializer(serializers.ModelSerializer):
+
+class StudentSerializer(CustomUserSerializer):
     group = GroupSerializer()
 
-    class Meta:
+    class Meta(CustomUserSerializer.Meta):
         model = Student
-        fields = (
-            "id",
-            "email",
-            "full_name",
-            "gender",
-            "age",
-            "is_active",
-            "is_staff",
-            "group",
-        )
+        fields = ("group",)

@@ -16,8 +16,9 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",
+    # "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
     "account",
     "curator",
     "direction",
@@ -93,19 +94,16 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Static files
-STATIC_URL = "static/"
-
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Default auth user model
-AUTH_USER_MODEL = "account.User"
+AUTH_USER_MODEL = "account.CustomUser"
 
-# Celery settings
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER")
-CELERY_RESULT_BACKEND = os.environ.get("CELERY_BACKEND")
-CELERY_ACCEPT_CONTENT = ["application/json"]
-CELERY_TASK_SERIALIZER = "json"
-CELERY_RESULT_SERIALIZER = "json"
-CELERY_TIMEZONE = "Europe/Moscow"
+# # Celery settings
+# CELERY_BROKER_URL = os.environ.get("CELERY_BROKER")
+# CELERY_RESULT_BACKEND = os.environ.get("CELERY_BACKEND")
+# CELERY_ACCEPT_CONTENT = ["application/json"]
+# CELERY_TASK_SERIALIZER = "json"
+# CELERY_RESULT_SERIALIZER = "json"
+# CELERY_TIMEZONE = "Europe/Moscow"

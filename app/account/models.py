@@ -6,10 +6,19 @@ from django.contrib.auth.models import (
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-GENDER_CHOICES = [("Man", "Мужчина"), ("Woman", "Женщина")]
+GENDER_CHOICES = [("male", "Мужчина"), ("female", "Женщина")]
 
 
 class CustomUserManager(BaseUserManager):
+    def create_user(self, email, password, **extra_fields):
+        if not email:
+            raise ValueError(_("User must have email"))
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save()
+        return user
+
     def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
@@ -24,15 +33,6 @@ class CustomUserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
-    def create_user(self, email, password, **extra_fields):
-        if not email:
-            raise ValueError(_("User must have email"))
-        email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
-        user.set_password(password)
-        user.save()
-        return user
-
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name="Электронная почта", unique=True)
@@ -41,7 +41,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     age = models.PositiveSmallIntegerField(
         verbose_name="Возраст",
     )
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
     objects = CustomUserManager()
