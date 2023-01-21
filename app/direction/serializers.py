@@ -6,9 +6,6 @@ from direction.models import Direction
 
 
 class DirectionSerializer(serializers.ModelSerializer):
-    curator = CuratorSerializer()
-    disciplines = DisciplineSerializer(many=True)
-
     class Meta:
         model = Direction
-        fields = ('name', 'curator', 'disciplines')
+        fields = "__all__"

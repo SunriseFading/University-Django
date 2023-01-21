@@ -1,12 +1,17 @@
-from curator.permissions import IsCuratorUser
-from rest_framework import viewsets
-from rest_framework.permissions import IsAdminUser
+from curator.permissions import IsCurator
+from rest_framework import generics
 
 from student.models import Student
 from student.serializers import StudentSerializer
 
 
-class StudentViewSet(viewsets.ModelViewSet):
+class StudentListCreateView(generics.ListCreateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    permission_classes = [IsAdminUser, IsCuratorUser]
+    permission_classes = [IsCurator]
+
+
+class StudentRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+    permission_classes = [IsCurator]

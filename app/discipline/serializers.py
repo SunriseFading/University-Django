@@ -6,4 +6,4 @@ from discipline.models import Discipline
 class DisciplineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Discipline
-        fields = ("name",)
+        fields = "__all__"

@@ -1,4 +1,5 @@
 from django.urls import path
+
 from direction.views import DirectionListCreateView, DirectionRetrieveUpdateDestroyView
 
 app_name = "direction"

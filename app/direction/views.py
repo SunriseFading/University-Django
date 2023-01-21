@@ -1,5 +1,6 @@
-from rest_framework.permissions import IsAdminUser
 from rest_framework import generics
+from rest_framework.permissions import IsAdminUser
+
 from direction.models import Direction
 from direction.serializers import DirectionSerializer
 

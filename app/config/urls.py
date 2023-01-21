@@ -7,7 +7,7 @@ urlpatterns = [
     path("account/", include("account.urls")),
     path("curator/", include("curator.urls")),
     path("direction/", include("direction.urls")),
-    # path("discipline/", include("discipline.urls")),
-    # path("group/", include("group.urls")),
-    # path("student/", include("student.urls")),
+    path("discipline/", include("discipline.urls")),
+    path("group/", include("group.urls")),
+    path("student/", include("student.urls")),
 ]

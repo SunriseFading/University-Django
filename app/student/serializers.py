@@ -5,8 +5,6 @@ from student.models import Student
 
 
 class StudentSerializer(CustomUserSerializer):
-    group = GroupSerializer()
-
     class Meta(CustomUserSerializer.Meta):
         model = Student
-        fields = ("group",)
+        fields = "__all__"

@@ -1,6 +1,8 @@
-TEST_EMAIL = "test@test.com"
-TEST_FULL_NAME = "Custom User"
-TEST_PASSWORD = "Password123!"
-TEST_WRONG_PASSWORD = "password"
+TEST_USER_EMAIL = "user@test.com"
+TEST_USER_FULL_NAME = "Custom User"
+TEST_UPDATED_USER_FULL_NAME = "Updated User"
 TEST_GENDER = "male"
 TEST_AGE = 30
+TEST_PASSWORD = "Password123!"
+TEST_WRONG_PASSWORD = "wrong"
+
