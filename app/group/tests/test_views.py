@@ -1,8 +1,8 @@
 from curator.models import Curator
 from direction.models import Direction
 from django.urls import reverse
-from rest_framework.test import APIClient, APITestCase
 from rest_framework import status
+from rest_framework.test import APIClient, APITestCase
 
 from group.models import Group
 from group.tests.settings import (
@@ -40,7 +40,7 @@ class GroupViewTest(APITestCase):
             "group:detail", kwargs={"pk": self.response.json()["id"]}
         )
 
-    def test_list_group(self):
+    def test_list_groups(self):
         response = self.client.get(path=self.list_path)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
@@ -53,7 +53,6 @@ class GroupViewTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["name"], TEST_GROUP_NAME)
         self.assertEqual(response.data["direction"], self.direction.id)
-        self.assertEqual(response.data["number_students"], 0)
 
     def test_update_group(self):
         self.group_data["name"] = TEST_UPDATED_GROUP_NAME

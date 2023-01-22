@@ -11,11 +11,6 @@ class Group(models.Model):
         on_delete=models.CASCADE,
         related_name="groups",
     )
-    number_students = models.PositiveSmallIntegerField(
-        verbose_name="Количество студентов",
-        default=0,
-        validators=[MinValueValidator(0), MaxValueValidator(20)],
-    )
 
     class Meta:
         verbose_name = "Учебная группа"

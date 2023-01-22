@@ -1,7 +1,7 @@
 from account.models import CustomUser
 from django.urls import reverse
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
 
 from discipline.models import Discipline
 from discipline.tests.settings import (
@@ -34,7 +34,7 @@ class DisciplineViewTest(APITestCase):
             "discipline:detail", kwargs={"pk": self.response.json()["id"]}
         )
 
-    def test_list_discipline(self):
+    def test_list_disciplines(self):
         response = self.client.get(path=self.list_path)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)

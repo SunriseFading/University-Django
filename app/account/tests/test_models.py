@@ -3,11 +3,11 @@ from django.test import TestCase
 from account.models import CustomUser
 from account.tests.settings import (
     TEST_AGE,
-    TEST_USER_EMAIL,
-    TEST_USER_FULL_NAME,
-    TEST_UPDATED_USER_FULL_NAME,
     TEST_GENDER,
     TEST_PASSWORD,
+    TEST_UPDATED_USER_FULL_NAME,
+    TEST_USER_EMAIL,
+    TEST_USER_FULL_NAME,
 )
 
 

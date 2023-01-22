@@ -5,4 +5,3 @@ TEST_GENDER = "male"
 TEST_AGE = 30
 TEST_PASSWORD = "Password123!"
 TEST_WRONG_PASSWORD = "wrong"
-

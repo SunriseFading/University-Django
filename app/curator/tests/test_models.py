@@ -6,9 +6,9 @@ from curator.tests.settings import (
     TEST_AGE,
     TEST_CURATOR_EMAIL,
     TEST_CURATOR_FULL_NAME,
-    TEST_UPDATED_CURATOR_FULL_NAME,
     TEST_GENDER,
     TEST_PASSWORD,
+    TEST_UPDATED_CURATOR_FULL_NAME,
 )
 
 

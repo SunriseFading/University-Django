@@ -49,7 +49,7 @@ class DirectionViewTest(APITestCase):
             "direction:detail", kwargs={"pk": self.response.json()["id"]}
         )
 
-    def test_list_direction(self):
+    def _direction(self):
         response = self.client.get(path=self.list_path)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)

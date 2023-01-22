@@ -1,5 +1,6 @@
-from rest_framework import permissions
+from rest_framework import status
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -7,7 +8,7 @@ from account.models import CustomUser
 
 
 class LoginView(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (AllowAny,)
 
     def post(self, request, *args, **kwargs):
         email = request.data.get("email")
@@ -16,16 +17,19 @@ class LoginView(APIView):
         if user and user.check_password(password):
             if user.is_active:
                 token, _ = Token.objects.get_or_create(user=user)
-                return Response({"token": token.key}, status=200)
+                return Response(data={"token": token.key}, status=status.HTTP_200_OK)
             else:
-                return Response({"error": "Removed"}, status=410)
+                return Response(data={"error": "Removed"}, status=status.HTTP_410_GONE)
         else:
-            return Response({"error": "Invalid login credentials"}, status=400)
+            return Response(
+                data={"error": "Invalid login credentials"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
 
 class LogoutView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
         Token.objects.filter(user=request.user).delete()
-        return Response(status=200)
+        return Response(status=status.HTTP_200_OK)

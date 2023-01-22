@@ -5,10 +5,10 @@ from rest_framework.test import APIClient, APITestCase
 from account.models import CustomUser
 from account.tests.settings import (
     TEST_AGE,
-    TEST_USER_EMAIL,
-    TEST_USER_FULL_NAME,
     TEST_GENDER,
     TEST_PASSWORD,
+    TEST_USER_EMAIL,
+    TEST_USER_FULL_NAME,
     TEST_WRONG_PASSWORD,
 )
 

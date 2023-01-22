@@ -10,8 +10,8 @@ from group.tests.settings import (
     TEST_DIRECTION_NAME,
     TEST_GENDER,
     TEST_GROUP_NAME,
-    TEST_UPDATED_GROUP_NAME,
     TEST_PASSWORD,
+    TEST_UPDATED_GROUP_NAME,
 )
 
 
@@ -37,7 +37,6 @@ class GroupModelTest(TestCase):
     def test_read_group(self):
         self.assertEqual(self.group.name, TEST_GROUP_NAME)
         self.assertEqual(self.group.direction, self.direction)
-        self.assertEqual(self.group.number_students, 0)
 
     def test_update_group(self):
         self.group.name = TEST_UPDATED_GROUP_NAME

@@ -1,25 +1,25 @@
-from direction.models import Direction
-from group.models import Group
-
 from curator.models import Curator
+from direction.models import Direction
+from django.urls import reverse
+from group.models import Group
+from rest_framework import status
+from rest_framework.test import APITestCase
+
 from student.tests.settings import (
     TEST_AGE,
     TEST_CURATOR_EMAIL,
     TEST_CURATOR_FULL_NAME,
+    TEST_DIRECTION_NAME,
+    TEST_GENDER,
+    TEST_GROUP_NAME,
+    TEST_PASSWORD,
     TEST_STUDENT_EMAIL,
     TEST_STUDENT_FULL_NAME,
-    TEST_GENDER,
-    TEST_PASSWORD,
     TEST_UPDATED_STUDENT_FULL_NAME,
-    TEST_DIRECTION_NAME,
-    TEST_GROUP_NAME,
 )
-from django.urls import reverse
-from rest_framework import status
-from rest_framework.test import APITestCase
 
 
-class CuratorViewTest(APITestCase):
+class StudentViewTest(APITestCase):
     def setUp(self):
         self.curator = Curator.objects.create(
             email=TEST_CURATOR_EMAIL,
@@ -49,13 +49,42 @@ class CuratorViewTest(APITestCase):
             "student:detail", kwargs={"pk": self.response.json()["id"]}
         )
 
-    def test_list_student(self):
+    def test_list_students(self):
         response = self.client.get(path=self.list_path)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
 
     def test_create_student(self):
         self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(self.group.students.count(), 1)
+
+    def test_limit_students(self):
+        for i in range(20):
+            self.student_data["email"] = f"test{i}@test.com"
+            response = self.client.post(path=self.list_path, data=self.student_data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        curator = Curator.objects.create(
+            email="curator1@test.com",
+            full_name=TEST_CURATOR_FULL_NAME,
+            gender=TEST_GENDER,
+            age=TEST_AGE,
+            password=TEST_PASSWORD,
+        )
+        direction = Direction.objects.create(name=TEST_DIRECTION_NAME, curator=curator)
+        group = Group.objects.create(name=TEST_GROUP_NAME, direction=direction)
+
+        self.student_data["email"] = "test20@test.com"
+        self.student_data["group"] = group.id
+        response = self.client.post(path=self.list_path, data=self.student_data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        self.student_data["group"] = self.group.id
+        response = self.client.put(path=self.detail_path, data=self.student_data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        response = self.client.patch(path=self.detail_path, data=self.student_data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_read_student(self):
         response = self.client.get(path=self.detail_path)

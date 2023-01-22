@@ -1,3 +1,8 @@
 Django
 djangorestframework
 psycopg2-binary
+celery
+openpyxl
+redis
+uwsgi
+gunicorn

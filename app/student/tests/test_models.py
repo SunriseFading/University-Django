@@ -7,14 +7,14 @@ from student.models import Student
 from student.tests.settings import (
     TEST_AGE,
     TEST_CURATOR_EMAIL,
+    TEST_CURATOR_FULL_NAME,
     TEST_DIRECTION_NAME,
+    TEST_GENDER,
+    TEST_GROUP_NAME,
+    TEST_PASSWORD,
     TEST_STUDENT_EMAIL,
     TEST_STUDENT_FULL_NAME,
     TEST_UPDATED_STUDENT_FULL_NAME,
-    TEST_CURATOR_FULL_NAME,
-    TEST_GROUP_NAME,
-    TEST_GENDER,
-    TEST_PASSWORD,
 )
 
 
