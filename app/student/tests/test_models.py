@@ -27,12 +27,8 @@ class StudentModelTest(TestCase):
             age=TEST_AGE,
             password=TEST_PASSWORD,
         )
-        self.direction = Direction.objects.create(
-            name=TEST_DIRECTION_NAME, curator=self.curator
-        )
-        self.group = Group.objects.create(
-            name=TEST_GROUP_NAME, direction=self.direction
-        )
+        self.direction = Direction.objects.create(name=TEST_DIRECTION_NAME, curator=self.curator)
+        self.group = Group.objects.create(name=TEST_GROUP_NAME, direction=self.direction)
         self.student = Student.objects.create(
             email=TEST_STUDENT_EMAIL,
             full_name=TEST_STUDENT_FULL_NAME,

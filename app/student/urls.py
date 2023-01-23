@@ -6,9 +6,5 @@ app_name = "student"
 
 urlpatterns = [
     path("", StudentListCreateView.as_view(), name="list"),
-    path(
-        "<int:pk>/",
-        StudentRetrieveUpdateDestroyView.as_view(),
-        name="detail",
-    ),
+    path("<int:pk>/", StudentRetrieveUpdateDestroyView.as_view(), name="detail"),
 ]

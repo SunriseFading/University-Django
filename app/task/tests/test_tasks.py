@@ -9,13 +9,7 @@ from student.models import Student
 
 from task.tasks import create_report
 
-from task.tests.settings import (
-    TEST_AGE,
-    TEST_CURATOR_FULL_NAME,
-    TEST_GENDER,
-    TEST_PASSWORD,
-    TEST_STUDENT_FULL_NAME,
-)
+from task.tests.settings import TEST_AGE, TEST_CURATOR_FULL_NAME, TEST_GENDER, TEST_PASSWORD, TEST_STUDENT_FULL_NAME
 
 
 class TaskReportTest(APITestCase):

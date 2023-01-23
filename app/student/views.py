@@ -15,10 +15,7 @@ class StudentListCreateView(generics.ListCreateAPIView):
     def post(self, request, *args, **kwargs):
         group = Group.objects.get(id=request.data["group"])
         if group.students.count() >= 20:
-            return Response(
-                data={"error": "Group already have 20 students"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+            return Response(data={"error": "Group already have 20 students"}, status=status.HTTP_400_BAD_REQUEST)
         return self.create(request, *args, **kwargs)
 
 
@@ -30,17 +27,11 @@ class StudentRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     def put(self, request, *args, **kwargs):
         group = Group.objects.get(id=request.data["group"])
         if self.get_object().group != group and group.students.count() >= 20:
-            return Response(
-                data={"error": "Group already have 20 students"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+            return Response(data={"error": "Group already have 20 students"}, status=status.HTTP_400_BAD_REQUEST)
         return self.update(request, *args, **kwargs)
 
     def patch(self, request, *args, **kwargs):
         group = Group.objects.get(id=request.data["group"])
         if self.get_object().group != group and group.students.count() >= 20:
-            return Response(
-                data={"error": "Group already have 20 students"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+            return Response(data={"error": "Group already have 20 students"}, status=status.HTTP_400_BAD_REQUEST)
         return self.partial_update(request, *args, **kwargs)

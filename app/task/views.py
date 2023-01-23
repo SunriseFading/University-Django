@@ -22,13 +22,10 @@ class ReportRetrievalView(APIView):
     def get(self, request, task_id):
         task = AsyncResult(task_id)
         if task.state != "SUCCESS":
-            return Response(
-                data={"status": task.state}, status=status.HTTP_102_PROCESSING
-            )
+            return Response(data={"status": task.state}, status=status.HTTP_102_PROCESSING)
         report = open(f"media/{task.result}", "rb")
         response = HttpResponse(
-            content=report,
-            content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            content=report, content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
         response["Content-Disposition"] = f"attachment; filename={task.result}"
         return response

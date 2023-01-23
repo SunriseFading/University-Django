@@ -1,8 +1,4 @@
-from django.contrib.auth.models import (
-    AbstractBaseUser,
-    BaseUserManager,
-    PermissionsMixin,
-)
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -38,9 +34,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name="Электронная почта", unique=True)
     full_name = models.CharField(verbose_name="ФИО", max_length=128)
     gender = models.CharField(verbose_name="Пол", choices=GENDER_CHOICES, max_length=32)
-    age = models.PositiveSmallIntegerField(
-        verbose_name="Возраст",
-    )
+    age = models.PositiveSmallIntegerField(verbose_name="Возраст")
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 

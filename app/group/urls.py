@@ -6,9 +6,5 @@ app_name = "group"
 
 urlpatterns = [
     path("", GroupListCreateView.as_view(), name="list"),
-    path(
-        "<int:pk>/",
-        GroupRetrieveUpdateDestroyView.as_view(),
-        name="detail",
-    ),
+    path("<int:pk>/", GroupRetrieveUpdateDestroyView.as_view(), name="detail"),
 ]

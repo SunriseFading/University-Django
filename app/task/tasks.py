@@ -6,11 +6,7 @@ from student.models import Student
 
 
 @shared_task
-def create_report(
-    directions=Direction.objects.all(),
-    groups=Group.objects.all(),
-    students=Student.objects.all(),
-):
+def create_report(directions=Direction.objects.all(), groups=Group.objects.all(), students=Student.objects.all()):
 
     report = Workbook()
     sheet = report.active
@@ -49,15 +45,7 @@ def create_report(
     sheet.append([])
     sheet.append(["ФИО", "Email", "Группа", "Пол", "Возраст"])
     for student in students:
-        sheet.append(
-            [
-                student.full_name,
-                student.email,
-                student.group.name,
-                student.gender,
-                student.age,
-            ]
-        )
+        sheet.append([student.full_name, student.email, student.group.name, student.gender, student.age])
 
     report.save("media/report.xlsx")
 

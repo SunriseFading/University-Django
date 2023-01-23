@@ -1,5 +1,4 @@
 from account.serializers import CustomUserSerializer
-from group.serializers import GroupSerializer
 
 from student.models import Student
 

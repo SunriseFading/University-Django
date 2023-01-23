@@ -28,19 +28,13 @@ class UserViewTest(APITestCase):
         self.logout_path = reverse("account:logout")
 
     def test_login_success(self):
-        response = self.client.post(
-            path=self.login_path,
-            data=self.login_data,
-        )
+        response = self.client.post(path=self.login_path, data=self.login_data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertTrue("token" in response.data)
 
     def test_login_failure(self):
         self.login_data["password"] = TEST_WRONG_PASSWORD
-        response = self.client.post(
-            path=self.login_path,
-            data=self.login_data,
-        )
+        response = self.client.post(path=self.login_path, data=self.login_data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertTrue("error" in response.data)
 

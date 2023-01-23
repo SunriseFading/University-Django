@@ -1,4 +1,3 @@
-from account.models import CustomUser
 from curator.models import Curator
 from discipline.models import Discipline
 from django.test import TestCase
@@ -25,9 +24,7 @@ class DirectionModelTest(TestCase):
             age=TEST_AGE,
             password=TEST_PASSWORD,
         )
-        self.direction = Direction.objects.create(
-            name=TEST_DIRECTION_NAME, curator=self.curator
-        )
+        self.direction = Direction.objects.create(name=TEST_DIRECTION_NAME, curator=self.curator)
         self.discipline = Discipline.objects.create(name=TEST_DISCIPLINE_NAME)
         self.direction.disciplines.add(self.discipline)
 

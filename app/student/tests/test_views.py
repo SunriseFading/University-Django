@@ -28,12 +28,8 @@ class StudentViewTest(APITestCase):
             age=TEST_AGE,
             password=TEST_PASSWORD,
         )
-        self.direction = Direction.objects.create(
-            name=TEST_DIRECTION_NAME, curator=self.curator
-        )
-        self.group = Group.objects.create(
-            name=TEST_GROUP_NAME, direction=self.direction
-        )
+        self.direction = Direction.objects.create(name=TEST_DIRECTION_NAME, curator=self.curator)
+        self.group = Group.objects.create(name=TEST_GROUP_NAME, direction=self.direction)
         self.student_data = {
             "email": TEST_STUDENT_EMAIL,
             "full_name": TEST_STUDENT_FULL_NAME,
@@ -45,9 +41,7 @@ class StudentViewTest(APITestCase):
         self.client.force_authenticate(user=self.curator)
         self.list_path = reverse("student:list")
         self.response = self.client.post(path=self.list_path, data=self.student_data)
-        self.detail_path = reverse(
-            "student:detail", kwargs={"pk": self.response.json()["id"]}
-        )
+        self.detail_path = reverse("student:detail", kwargs={"pk": self.response.json()["id"]})
 
     def test_list_students(self):
         response = self.client.get(path=self.list_path)
@@ -102,8 +96,5 @@ class StudentViewTest(APITestCase):
         self.assertContains(response, TEST_UPDATED_STUDENT_FULL_NAME)
 
     def test_delete_group(self):
-        response = self.client.delete(
-            path=self.detail_path,
-            follow=True,
-        )
+        response = self.client.delete(path=self.detail_path, follow=True)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

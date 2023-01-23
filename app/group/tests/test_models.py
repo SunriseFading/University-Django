@@ -24,12 +24,8 @@ class GroupModelTest(TestCase):
             age=TEST_AGE,
             password=TEST_PASSWORD,
         )
-        self.direction = Direction.objects.create(
-            name=TEST_DIRECTION_NAME, curator=self.curator
-        )
-        self.group = Group.objects.create(
-            name=TEST_GROUP_NAME, direction=self.direction
-        )
+        self.direction = Direction.objects.create(name=TEST_DIRECTION_NAME, curator=self.curator)
+        self.group = Group.objects.create(name=TEST_GROUP_NAME, direction=self.direction)
 
     def test_create_group(self):
         self.assertEqual(Group.objects.count(), 1)

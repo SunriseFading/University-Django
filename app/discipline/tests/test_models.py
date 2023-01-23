@@ -1,5 +1,3 @@
-from account.models import CustomUser
-from curator.models import Curator
 from django.test import TestCase
 
 from discipline.models import Discipline

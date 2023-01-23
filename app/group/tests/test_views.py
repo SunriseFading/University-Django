@@ -2,9 +2,8 @@ from curator.models import Curator
 from direction.models import Direction
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APIClient, APITestCase
+from rest_framework.test import APITestCase
 
-from group.models import Group
 from group.tests.settings import (
     TEST_AGE,
     TEST_CURATOR_EMAIL,
@@ -26,19 +25,12 @@ class GroupViewTest(APITestCase):
             age=TEST_AGE,
             password=TEST_PASSWORD,
         )
-        self.direction = Direction.objects.create(
-            name=TEST_DIRECTION_NAME, curator=self.curator
-        )
-        self.group_data = {
-            "name": TEST_GROUP_NAME,
-            "direction": self.direction.id,
-        }
+        self.direction = Direction.objects.create(name=TEST_DIRECTION_NAME, curator=self.curator)
+        self.group_data = {"name": TEST_GROUP_NAME, "direction": self.direction.id}
         self.client.force_authenticate(user=self.curator)
         self.list_path = reverse("group:list")
         self.response = self.client.post(path=self.list_path, data=self.group_data)
-        self.detail_path = reverse(
-            "group:detail", kwargs={"pk": self.response.json()["id"]}
-        )
+        self.detail_path = reverse("group:detail", kwargs={"pk": self.response.json()["id"]})
 
     def test_list_groups(self):
         response = self.client.get(path=self.list_path)
@@ -61,8 +53,5 @@ class GroupViewTest(APITestCase):
         self.assertContains(response, TEST_UPDATED_GROUP_NAME)
 
     def test_delete_group(self):
-        response = self.client.delete(
-            path=self.detail_path,
-            follow=True,
-        )
+        response = self.client.delete(path=self.detail_path, follow=True)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

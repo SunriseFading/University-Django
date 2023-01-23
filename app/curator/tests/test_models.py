@@ -1,4 +1,3 @@
-from account.models import CustomUser
 from django.test import TestCase
 
 from curator.models import Curator

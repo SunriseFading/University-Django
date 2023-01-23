@@ -3,9 +3,8 @@ from curator.models import Curator
 from discipline.models import Discipline
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APIClient, APITestCase
+from rest_framework.test import APITestCase
 
-from direction.models import Direction
 from direction.tests.settings import (
     TEST_ADMIN_EMAIL,
     TEST_ADMIN_FULL_NAME,
@@ -45,9 +44,7 @@ class DirectionViewTest(APITestCase):
         self.client.force_authenticate(self.admin)
         self.list_path = reverse("direction:list")
         self.response = self.client.post(path=self.list_path, data=self.direction_data)
-        self.detail_path = reverse(
-            "direction:detail", kwargs={"pk": self.response.json()["id"]}
-        )
+        self.detail_path = reverse("direction:detail", kwargs={"pk": self.response.json()["id"]})
 
     def _direction(self):
         response = self.client.get(path=self.list_path)
@@ -66,16 +63,10 @@ class DirectionViewTest(APITestCase):
 
     def test_update_direction(self):
         self.direction_data["name"] = TEST_UPDATED_DIRECTION_NAME
-        response = self.client.put(
-            path=self.detail_path,
-            data=self.direction_data,
-        )
+        response = self.client.put(path=self.detail_path, data=self.direction_data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, TEST_UPDATED_DIRECTION_NAME)
 
     def test_delete_direction(self):
-        response = self.client.delete(
-            path=self.detail_path,
-            follow=True,
-        )
+        response = self.client.delete(path=self.detail_path, follow=True)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

@@ -34,9 +34,7 @@ class CuratorViewTest(APITestCase):
         self.client.force_authenticate(self.admin)
         self.list_path = reverse("curator:list")
         self.response = self.client.post(path=self.list_path, data=self.curator_data)
-        self.detail_path = reverse(
-            "curator:detail", kwargs={"pk": self.response.json()["id"]}
-        )
+        self.detail_path = reverse("curator:detail", kwargs={"pk": self.response.json()["id"]})
 
     def test_list_curators(self):
         response = self.client.get(path=self.list_path)
@@ -56,16 +54,10 @@ class CuratorViewTest(APITestCase):
 
     def test_update_curator(self):
         self.curator_data["full_name"] = TEST_UPDATED_CURATOR_FULL_NAME
-        response = self.client.put(
-            path=self.detail_path,
-            data=self.curator_data,
-        )
+        response = self.client.put(path=self.detail_path, data=self.curator_data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, TEST_UPDATED_CURATOR_FULL_NAME)
 
     def test_delete_curator(self):
-        response = self.client.delete(
-            path=self.detail_path,
-            follow=True,
-        )
+        response = self.client.delete(path=self.detail_path, follow=True)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

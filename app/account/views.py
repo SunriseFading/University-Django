@@ -1,6 +1,6 @@
 from rest_framework import status
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -21,10 +21,7 @@ class LoginView(APIView):
             else:
                 return Response(data={"error": "Removed"}, status=status.HTTP_410_GONE)
         else:
-            return Response(
-                data={"error": "Invalid login credentials"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+            return Response(data={"error": "Invalid login credentials"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LogoutView(APIView):

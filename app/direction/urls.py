@@ -6,9 +6,5 @@ app_name = "direction"
 
 urlpatterns = [
     path("", DirectionListCreateView.as_view(), name="list"),
-    path(
-        "<int:pk>/",
-        DirectionRetrieveUpdateDestroyView.as_view(),
-        name="detail",
-    ),
+    path("<int:pk>/", DirectionRetrieveUpdateDestroyView.as_view(), name="detail"),
 ]

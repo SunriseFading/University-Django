@@ -1,15 +1,11 @@
 from direction.models import Direction
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 
 class Group(models.Model):
     name = models.CharField(verbose_name="Название", max_length=128)
     direction = models.ForeignKey(
-        verbose_name="Направление",
-        to=Direction,
-        on_delete=models.CASCADE,
-        related_name="groups",
+        verbose_name="Направление", to=Direction, on_delete=models.CASCADE, related_name="groups"
     )
 
     class Meta:
